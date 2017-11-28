@@ -5,10 +5,16 @@
 
         {% load static %}
         {% load bootstrap3 %}
+
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+
         {% bootstrap_css %}
         {% bootstrap_javascript %}
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
+
+        <script src="static/js/bootstrap-filestyle/1.2.3/bootstrap-filestyle.min.js"></script>
+
         {% block head %}{% endblock%}
 
     </head>

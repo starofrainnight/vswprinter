@@ -12,8 +12,9 @@
         <div class="col-xs-12">
             <form enctype="multipart/form-data" method="post" class="form">
                 {% csrf_token %}
-                {% bootstrap_form form %}
-
+                <p><strong>Upload PDF file for print to printer:</strong></p>
+                <input type="file" class="filestyle" name="file">
+                <br />
                 <button type="submit" class="btn btn-primary">
                     {% bootstrap_icon "star" %} Upload
                 </button>
