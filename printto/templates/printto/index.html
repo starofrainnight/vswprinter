@@ -1,7 +1,6 @@
 {% extends "printto/base.html" %}
 
 {% load static %}
-{% load bootstrap3 %}
 {% load sass_tags %}
 
 {% block title %}PrintTo{% endblock title %}
@@ -16,7 +15,7 @@
                 <input type="file" class="filestyle" name="file">
                 <br />
                 <button type="submit" class="btn btn-primary">
-                    {% bootstrap_icon "star" %} Upload
+                    <span class="glyphicon glyphicon-star"></span> Upload
                 </button>
             </form>
         </div>
