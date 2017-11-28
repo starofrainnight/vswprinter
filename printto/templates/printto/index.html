@@ -1,13 +1,25 @@
 {% extends "printto/base.html" %}
 
 {% load static %}
-
-{# Load the tag library #}
 {% load bootstrap3 %}
+{% load sass_tags %}
 
 {% block title %}PrintTo{% endblock title %}
 
 {% block content %}
-<p>Empty printo index page!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <form enctype="multipart/form-data" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} Upload
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
 

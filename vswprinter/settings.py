@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,12 @@ WSGI_APPLICATION = 'vswprinter.wsgi.application'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
 ]
 
 # Database

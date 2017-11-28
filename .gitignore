@@ -64,3 +64,4 @@ target/
 # Ignore vscode stuffs
 .vscode
 
+upload/
