@@ -30,3 +30,7 @@ class IndexView(FormView):
 
 class UploadSuccessedView(TemplateView):
     template_name = get_template_name("upload_successed.html")
+
+
+class AboutView(TemplateView):
+    template_name = get_template_name("about.html")
