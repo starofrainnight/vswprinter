@@ -7,9 +7,14 @@ DJANGO_SETTINGS_MODULE="vswprinter.settings_production" python manage.py runserv
 
 """
 
+import os.path
 from .settings import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
