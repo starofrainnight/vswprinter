@@ -1,4 +1,5 @@
 django>=1.11.7
+WhiteNoise
 apscheduler
 arrow
 libsass
