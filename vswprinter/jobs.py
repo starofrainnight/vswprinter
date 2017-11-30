@@ -11,4 +11,6 @@ scheduler = BackgroundScheduler()
 scheduler.start()
 
 scheduler.add_job(
-    functools.partial(call_command, "cleanprinteddocs"), 'interval', minutes=1)
+    functools.partial(call_command, "cleanprinteddocs"),
+    'interval', minutes=1,
+    misfire_grace_time=60)
