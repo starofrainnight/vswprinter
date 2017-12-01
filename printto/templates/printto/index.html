@@ -11,8 +11,9 @@
         <div class="col-xs-12">
             <form enctype="multipart/form-data" method="post" class="form">
                 {% csrf_token %}
-                <p><strong>Upload PDF file for print to printer:</strong></p>
-                <input type="file" class="filestyle" name="file">
+                <p><strong>Upload file for print (Only accept *.pdf):</strong></p>
+                {% comment %} The attribute 'accept' only works above ie10 {% endcomment %}
+                <input type="file" class="filestyle" name="file" accept=".pdf">
                 <br />
                 <button type="submit" class="btn btn-primary">
                     <span class="glyphicon glyphicon-star"></span> Print
