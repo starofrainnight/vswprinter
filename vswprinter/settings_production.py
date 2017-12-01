@@ -14,3 +14,8 @@ from .settings import *
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+
+# WhiteNoise must work with STATIC_ROOT setting!
+# It must not defined inside debug setttings, otherwise django will complain
+# that STATIC_ROOT must not inside STATICFILES_DIRS.
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

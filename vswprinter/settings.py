@@ -72,11 +72,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vswprinter.wsgi.application'
 
-# WhiteNoise must work with STATIC_ROOT setting!
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 STATICFILES_DIRS = [
-    STATIC_ROOT,
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 STATICFILES_FINDERS = [
