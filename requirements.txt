@@ -5,3 +5,4 @@ arrow
 libsass
 django-compressor
 django-sass-processor
+django-htmlmin
