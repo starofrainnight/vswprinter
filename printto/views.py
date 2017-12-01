@@ -1,4 +1,5 @@
 import os
+import vswprinter
 from django.views.generic import TemplateView, FormView
 from . import APP_NAME, get_template_name
 from .forms import UploadedFileForm
@@ -34,3 +35,7 @@ class UploadSuccessedView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = get_template_name("about.html")
+
+    project_version = vswprinter.__version__
+    project_author = vswprinter.__author__
+    project_email = vswprinter.__email__
