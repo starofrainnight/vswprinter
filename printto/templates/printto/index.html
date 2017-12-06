@@ -11,23 +11,41 @@
 <script src='{% static "dropzonejs/5.2.0/js/dropzone.min.js" %}'></script>
 
 <script>
-// Dropzone configurations
-Dropzone.options.printerDropzone = {
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 100, // MB
-    acceptedFiles: "application/pdf",
-    addRemoveLinks: true,
-    parallelUploads: 1,
-    createImageThumbnails: false,
-    accept: function(file, done) {
-        fileExt = file.name.split('.').pop();
-        if ((fileExt != "pdf") && (fileExt != "PDF")) {
-            done("Unsupported file type!");
-        } else {
-            done();
-        }
-    },
-    dictDefaultMessage: "<h3><strong>Click here or drop files here to upload!</strong><h3>"
+
+$(document).ready(function(){
+    // Dropzone configurations
+    Dropzone.options.printerDropzone = {
+        paramName: "file", // The name that will be used to transfer the file
+        maxFilesize: 100, // MB
+        acceptedFiles: "application/pdf",
+        addRemoveLinks: true,
+        parallelUploads: 1,
+        createImageThumbnails: false,
+        autoProcessQueue: false,
+        accept: function(file, done) {
+            fileExt = file.name.split('.').pop();
+            if ((fileExt != "pdf") && (fileExt != "PDF")) {
+                done("Unsupported file type!");
+            } else {
+                done();
+            }
+        },
+        dictDefaultMessage: "<h3><strong>Click here or drop files here to upload!</strong><h3>"
+    };
+
+    printerDropzone = Dropzone.forElement("#printerDropzone")
+
+    // Disable queue auto processing on upload complete
+    printerDropzone.on("queuecomplete", function() {
+        printerDropzone.options.autoProcessQueue = false;
+    });
+});
+
+function startUpload() {
+    printerDropzone = Dropzone.forElement("#printerDropzone")
+
+    printerDropzone.options.autoProcessQueue = true;
+    printerDropzone.processQueue();
 };
 </script>
 {% endblock%}
@@ -35,7 +53,10 @@ Dropzone.options.printerDropzone = {
 {% block content %}
 <div class="container">
     <div class="row">
-        <h4>Printing documents:</h4>
+        <button class="btn btn-primary start" onclick="startUpload()">
+            <i class="glyphicon glyphicon-upload"></i> <span>Start upload</span>
+        </button>
+        <h4>Queued documents:</h4>
         <form id="printerDropzone"
             action='{% url "index" %}'
             enctype="multipart/form-data"
