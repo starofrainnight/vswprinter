@@ -17,6 +17,7 @@ Dropzone.options.printerDropzone = {
     maxFilesize: 100, // MB
     acceptedFiles: "application/pdf",
     addRemoveLinks: true,
+    parallelUploads: 1,
     createImageThumbnails: false,
     accept: function(file, done) {
         fileExt = file.name.split('.').pop();
