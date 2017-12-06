@@ -32,18 +32,18 @@ $(document).ready(function(){
         },
         dictDefaultMessage: "<h3><strong>Click here or drop files here to upload!</strong><h3>"
     };
-
-    printerDropzone = Dropzone.forElement("#printerDropzone")
-
-    // Disable queue auto processing on upload complete
-    printerDropzone.on("queuecomplete", function() {
-        printerDropzone.options.autoProcessQueue = false;
-    });
 });
 
-function startUpload() {
-    printerDropzone = Dropzone.forElement("#printerDropzone")
+function resetAutoProcessQueueOption() {
+    printerDropzone = Dropzone.forElement("#printerDropzone");
+    printerDropzone.options.autoProcessQueue = false;
+};
 
+function startUpload() {
+    printerDropzone = Dropzone.forElement("#printerDropzone");
+
+    // Disable queue auto processing on upload complete
+    printerDropzone.on("queuecomplete", resetAutoProcessQueueOption);
     printerDropzone.options.autoProcessQueue = true;
     printerDropzone.processQueue();
 };
@@ -56,15 +56,15 @@ function startUpload() {
         <button class="btn btn-primary start" onclick="startUpload()">
             <i class="glyphicon glyphicon-upload"></i> <span>Start upload</span>
         </button>
-        <h4>Queued documents:</h4>
-        <form id="printerDropzone"
-            action='{% url "index" %}'
-            enctype="multipart/form-data"
-            method="post"
-            class="dropzone">
-            {% csrf_token %}
-        </form>
     </div>
+    <h4>Queued documents:</h4>
+    <form id="printerDropzone"
+        action='{% url "index" %}'
+        enctype="multipart/form-data"
+        method="post"
+        class="dropzone">
+        {% csrf_token %}
+    </form>
 </div>
 {% endblock content %}
 
