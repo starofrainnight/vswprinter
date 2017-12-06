@@ -5,21 +5,42 @@
 
 {% block title %}PrintTo{% endblock title %}
 
+{% block head %}
+<link href='{% static "dropzonejs/5.2.0/css/basic.min.css" %}' rel="stylesheet">
+<link href='{% static "dropzonejs/5.2.0/css/dropzone.min.css" %}' rel="stylesheet">
+<script src='{% static "dropzonejs/5.2.0/js/dropzone.min.js" %}'></script>
+
+<script>
+// Dropzone configurations
+Dropzone.options.printerDropzone = {
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 100, // MB
+    acceptedFiles: "application/pdf",
+    addRemoveLinks: true,
+    accept: function(file, done) {
+        fileExt = file.name.split('.').pop();
+        if ((fileExt != "pdf") && (fileExt != "PDF")) {
+            done("Unsupported file type!");
+        } else {
+            done();
+        }
+    },
+    dictDefaultMessage: "<h3><strong>Click here or drop files here to upload!</strong><h3>"
+};
+</script>
+{% endblock%}
+
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <form enctype="multipart/form-data" method="post" class="form">
-                {% csrf_token %}
-                <p><strong>Upload file for print (Only accept *.pdf):</strong></p>
-                {% comment %} The attribute 'accept' only works above ie10 {% endcomment %}
-                <input type="file" class="filestyle" name="file" accept=".pdf">
-                <br />
-                <button type="submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-star"></span> Print
-                </button>
-            </form>
-        </div>
+        <h4>Printing documents:</h4>
+        <form id="printerDropzone"
+            action='{% url "index" %}'
+            enctype="multipart/form-data"
+            method="post"
+            class="dropzone">
+            {% csrf_token %}
+        </form>
     </div>
 </div>
 {% endblock content %}

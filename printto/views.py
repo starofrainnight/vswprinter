@@ -10,7 +10,7 @@ class IndexView(FormView):
     # Replace with your template.
     template_name = get_template_name('index.html')
     # Replace with your URL or reverse().
-    success_url = '/%s/successed' % APP_NAME
+    success_url = '/'
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -27,10 +27,6 @@ class IndexView(FormView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
-
-class UploadSuccessedView(TemplateView):
-    template_name = get_template_name("upload_successed.html")
 
 
 class AboutView(TemplateView):
