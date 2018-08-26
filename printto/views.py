@@ -22,8 +22,17 @@ class IndexView(FormView):
 
             print("Printing : %s" % model.file.path)
 
-            os.system(".\\SumatraPDF.exe -print-to-default \"%s\"" %
-                      model.file.path)
+            printer_name = os.environ.get('VSWPRINTER_PRINT_TO')
+            if printer_name:
+                print("Print to %s ..." % printer_name)
+
+                os.system(".\\SumatraPDF.exe -print-to \"%s\" \"%s\"" %
+                          (printer_name, model.file.path))
+            else:
+                print("Print to default printer ...")
+
+                os.system(".\\SumatraPDF.exe -print-to-default \"%s\"" %
+                          model.file.path)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
