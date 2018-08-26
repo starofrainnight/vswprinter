@@ -21,7 +21,7 @@ window.onload = function() {
 
 $(document).ready(function() {
     // Dropzone configurations
-    var printerDropzone = new Dropzone("#printerDropzone", {
+    var dzone = new Dropzone("#printerDropzone", {
         paramName: "file", // The name that will be used to transfer the file
         maxFilesize: 100, // MB
         acceptedFiles: "application/pdf",
@@ -42,17 +42,17 @@ $(document).ready(function() {
 });
 
 function resetAutoProcessQueueOption() {
-    printerDropzone = Dropzone.forElement("#printerDropzone");
-    printerDropzone.options.autoProcessQueue = false;
+    dzone = Dropzone.forElement("#printerDropzone");
+    dzone.options.autoProcessQueue = false;
 };
 
 function startUpload() {
-    printerDropzone = Dropzone.forElement("#printerDropzone");
+    dzone = Dropzone.forElement("#printerDropzone");
 
     // Disable queue auto processing on upload complete
-    printerDropzone.on("queuecomplete", resetAutoProcessQueueOption);
-    printerDropzone.options.autoProcessQueue = true;
-    printerDropzone.processQueue();
+    dzone.on("queuecomplete", resetAutoProcessQueueOption);
+    dzone.options.autoProcessQueue = true;
+    dzone.processQueue();
 };
 </script>
 {% endblock%}
