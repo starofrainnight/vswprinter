@@ -44,6 +44,31 @@ $(document).ready(function() {
 function resetAutoProcessQueueOption() {
     dzone = Dropzone.forElement("#printerDropzone");
     dzone.options.autoProcessQueue = false;
+
+    // Generate printed file list
+    var nowDate = new Date();
+    var printedHtml = ""
+
+    files = dzone.getAcceptedFiles()
+    if(files.length <= 0) {
+        // Ignore non-files situation
+        return;
+    };
+
+    printedHtml += "<strong>";
+    printedHtml += nowDate.toDateString() + "@" + nowDate.toTimeString();
+    printedHtml += "<BR />Printed " + String(files.length) + " files";
+    printedHtml += "</strong>: <BR />";
+
+    alert(files.length);
+
+    for (i = 0; i < files.length; i++) {
+        printedHtml += "<BR />" + String(i) + ": " + files[i].name;
+    };
+    // Tell what we printed
+    $("#printedInfo").html(printedHtml);
+
+    // Clear printed files
     dzone.removeAllFiles();
 };
 
@@ -73,6 +98,9 @@ function startUpload() {
         class="dropzone">
         {% csrf_token %}
     </form>
+    <h4>Printed documents:</h4>
+    <div id="printedInfo" class="alert alert-info">
+    </div>
 </div>
 {% endblock content %}
 
