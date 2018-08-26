@@ -65,3 +65,4 @@ target/
 .vscode
 
 upload/
+static-root/
