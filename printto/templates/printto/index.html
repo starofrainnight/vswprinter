@@ -10,11 +10,18 @@
 <link href='{% static "dropzonejs/5.2.0/css/dropzone.min.css" %}' rel="stylesheet">
 <script src='{% static "dropzonejs/5.2.0/js/dropzone.min.js" %}'></script>
 
-<script>
+<script type="text/javascript">
 
-$(document).ready(function(){
+window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    };
+};
+
+$(document).ready(function() {
     // Dropzone configurations
-    Dropzone.options.printerDropzone = {
+    var printerDropzone = new Dropzone("#printerDropzone", {
         paramName: "file", // The name that will be used to transfer the file
         maxFilesize: 100, // MB
         acceptedFiles: "application/pdf",
@@ -30,8 +37,8 @@ $(document).ready(function(){
                 done();
             }
         },
-        dictDefaultMessage: "<h3><strong>Click here or drop files here to upload!</strong><h3>"
-    };
+        dictDefaultMessage: "<h3><strong>Click here or drop files here!</strong><h3>"
+    });
 });
 
 function resetAutoProcessQueueOption() {
